@@ -1,12 +1,15 @@
-import Head from "next/head";
+"use client";
+
+import SimpleTable from "@/components/Tables/SimpleTable";
+import getStockData from "@/core/api/getStockData";
+import DataTable from "@/layouts/DataTable";
 
 export default function Home() {
   return (
     <main>
-      <Head>
-        <link rel="shortcut icon" href="/images/favicon.ico" />
-      </Head>
-      <div>Hello</div>
+      <div className="w-screen h-screen">
+        <DataTable />
+      </div>
     </main>
   );
 }

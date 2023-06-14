@@ -4,15 +4,15 @@ import TableData from "./TableData";
 
 const SimpleTable = ({ data }: { data: Stock[] }) => {
   return (
-    <div className="overflow-auto h-1/3 w-full">
-      <table className="table-auto w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50 sticky top-0">
+    <div className="overflow-auto h-1/3 w-3/4 m-auto border-2">
+      <table className="table-auto w-full divide-y divide-gray-200 border-1">
+        <thead className="bg-black text-white sticky top-0">
           <tr>
             {data &&
               Object.keys(data[0]).map((value, idx) => (
                 <th
                   key={idx}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border"
+                  className="text-center px-6 py-3 text-xs font-medium text-white uppercase tracking-wider border"
                 >
                   {value}
                 </th>

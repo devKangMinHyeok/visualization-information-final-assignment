@@ -1,11 +1,11 @@
 declare module "stock-data" {
   interface Stock {
     date: Date;
-    open: Number;
-    high: Number;
-    low: Number;
-    close: Number;
-    adjClose: Number;
-    volume: Number;
+    open: number;
+    high: number;
+    low: number;
+    close: number;
+    adjClose: number;
+    volume: number;
   }
 }

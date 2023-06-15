@@ -20,8 +20,8 @@ export default function RootLayout({
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
-      <body className={(inter.className, "m-5")}>
-        <h1 className="text-5xl font-bold">Stock Dashboard</h1>
+      <body className={(inter.className, "bg-gray-200")}>
+        <h1 className="text-5xl font-bold mx-5 my-5">Stock Dashboard</h1>
         <Providers>{children}</Providers>
       </body>
     </html>

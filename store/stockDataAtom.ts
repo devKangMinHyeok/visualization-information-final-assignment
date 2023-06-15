@@ -3,6 +3,18 @@ import { Stock } from "stock-data";
 
 export const stockDataAtom = atom<Stock[]>([]);
 
+export const stockDataObjectAtom = atom((get) => {
+  const stocks = get(stockDataAtom);
+
+  const stocksObject: { [key: string]: Stock } = {};
+
+  stocks.forEach((stock) => {
+    stocksObject[stock.date.toString()] = stock;
+  });
+
+  return stocksObject;
+});
+
 export const transformedStockDataAtom = atom((get) => {
   const stocks = get(stockDataAtom);
 
@@ -17,21 +29,20 @@ export const transformedStockDataAtom = atom((get) => {
 });
 
 export const profitRateAtom = atom((get) => {
-  const transformedStocks = get(transformedStockDataAtom);
+  const stocks = get(stockDataAtom);
 
-  return transformedStocks
+  return stocks
     .map((stock, idx) => {
       if (idx === 0) {
         return null;
       }
 
-      const prevClose = transformedStocks[idx - 1].value;
-      const currClose = stock.value;
-
+      const prevClose = stocks[idx - 1].close;
+      const currClose = stock.close;
       const profitRate = (currClose - prevClose) / prevClose;
 
       return {
-        time: stock.time,
+        time: stock.date,
         value: profitRate,
       };
     })

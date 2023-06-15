@@ -1,15 +1,19 @@
 import { createChart, ColorType } from "lightweight-charts";
 import React, { useEffect, useRef } from "react";
+import { useSetAtom } from "jotai";
+import { hoverTimeAtom } from "@/store/interactionDataAtom";
 
 export const LineChart = ({ ...props }) => {
+  const setHoverData = useSetAtom(hoverTimeAtom);
+
   const {
     data,
     colors: {
       backgroundColor = "white",
-      lineColor = "#292929",
+      lineColor = "#6700dd",
       textColor = "black",
-      areaTopColor = "#585858",
-      areaBottomColor = "rgba(210, 210, 210, 0.28)",
+      areaTopColor = "rgba(144, 0, 255, 0.87)",
+      areaBottomColor = "rgba(144, 0, 255, 0.2)",
     } = {},
   } = props;
 
@@ -42,6 +46,13 @@ export const LineChart = ({ ...props }) => {
 
     window.addEventListener("resize", handleResize);
 
+    chart.subscribeCrosshairMove((param) => {
+      if (param.time && param.seriesData.size) {
+        const hoverData = param.time.toString();
+        setHoverData(hoverData);
+      }
+    });
+
     return () => {
       window.removeEventListener("resize", handleResize);
 
@@ -54,7 +65,10 @@ export const LineChart = ({ ...props }) => {
     textColor,
     areaTopColor,
     areaBottomColor,
+    setHoverData,
   ]);
+
+  useEffect(() => {});
 
   return <div ref={chartContainerRef} />;
 };

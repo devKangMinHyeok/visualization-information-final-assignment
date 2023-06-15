@@ -16,10 +16,8 @@ const tabs = [
 ];
 
 function LineChartContainer() {
-  const [selectedChart, setSelectedChart] = useState("Close Chart");
-
   return (
-    <div className="w-full">
+    <div className="flex-1 p-4 shadow-lg bg-white">
       <h3 className="text-2xl font-bold m-5">Line Chart</h3>
       <TabsPrimitive.Root defaultValue="Close Chart">
         <TabsPrimitive.List
@@ -31,13 +29,23 @@ function LineChartContainer() {
               value={title}
               className={clsx(
                 "group",
-                "border-b",
+                "first:rounded-tl-lg last:rounded-tr-lg",
+                "border first:border-r last:border-l",
                 "border-gray-300",
+                "focus:border-2 focus:border-purple-500",
+                "hover:border-2 hover:border-purple-500",
+                "active:border-2 active:border-purple-500",
                 "flex-1 px-3 py-2.5",
-                "focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
+                "z-10 outline-none ring-purple-500 ring-opacity-75"
               )}
             >
-              {title}
+              <span
+                className={clsx(
+                  "text-sm font-medium text-gray-700 focus:text-white"
+                )}
+              >
+                {title}
+              </span>
             </TabsPrimitive.Trigger>
           ))}
         </TabsPrimitive.List>
@@ -45,7 +53,7 @@ function LineChartContainer() {
           <TabsPrimitive.Content
             key={`tab-content-${title}`}
             value={title}
-            className={clsx("rounded-b-lg bg-white px-6 py-4")}
+            className={"border rounded-b-lg bg-white px-6 py-4"}
           >
             {React.createElement(component)}
           </TabsPrimitive.Content>

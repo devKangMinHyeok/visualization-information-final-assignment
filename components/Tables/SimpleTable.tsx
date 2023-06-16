@@ -8,7 +8,7 @@ const SimpleTable = ({ data }: { data: Stock[] }) => {
   return (
     <div className="overflow-auto h-3/4 w-3/4 m-auto border-2">
       <table className="table-auto w-full divide-y divide-gray-200 border-1">
-        <thead className="bg-black text-white sticky top-0">
+        <thead className="bg-purple-800 text-white sticky top-0">
           <tr>
             {data &&
               data[0] &&

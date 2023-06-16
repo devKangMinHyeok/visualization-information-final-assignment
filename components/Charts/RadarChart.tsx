@@ -53,7 +53,11 @@ function RadarChart({ data }: { data: Stock }) {
       },
     },
   };
-  return <Radar data={transformedData} options={options} />;
+  return (
+    <div>
+      <Radar data={transformedData} options={options} />
+    </div>
+  );
 }
 
 export default RadarChart;

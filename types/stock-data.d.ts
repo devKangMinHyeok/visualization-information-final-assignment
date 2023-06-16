@@ -8,4 +8,9 @@ declare module "stock-data" {
     adjClose: number;
     volume: number;
   }
+
+  interface TimeValue {
+    time: Date;
+    value: number;
+  }
 }

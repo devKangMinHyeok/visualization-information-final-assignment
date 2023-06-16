@@ -41,7 +41,7 @@ function DateDoubleSlider({ dates, setFunc }: DateDoubleSliderProps) {
 
   return (
     <div>
-      <div style={{ width: "90%", margin: 50 }}>
+      <div style={{ width: "80%", margin: 50 }}>
         {dates.length ? (
           <TooltipSlider
             range

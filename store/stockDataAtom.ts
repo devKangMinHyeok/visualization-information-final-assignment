@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { Stock } from "stock-data";
+import { Stock, TimeValue } from "stock-data";
 import { dateRangeAtom } from "./interactionDataAtom";
 
 export const stockDataAtom = atom<Stock[]>([]);
@@ -34,7 +34,7 @@ export const stockDataObjectAtom = atom((get) => {
   return stocksObject;
 });
 
-export const transformedStockDataAtom = atom((get) => {
+export const transformedStockDataAtom = atom<TimeValue[]>((get) => {
   const stocks = get(filteredStockDataAtom);
 
   return stocks.map((stock) => {
@@ -47,7 +47,7 @@ export const transformedStockDataAtom = atom((get) => {
   });
 });
 
-export const profitRateAtom = atom((get) => {
+export const profitRateAtom = atom<TimeValue[]>((get) => {
   const stocks = get(filteredStockDataAtom);
 
   return stocks
@@ -65,5 +65,17 @@ export const profitRateAtom = atom((get) => {
         value: profitRate,
       };
     })
-    .filter(Boolean);
+    .filter(Boolean) as TimeValue[];
+});
+
+export const profitRateDesSortAtom = atom<TimeValue[]>((get) => {
+  const profitRate = get(profitRateAtom);
+
+  return [...profitRate].sort((a, b) => b.value - a.value);
+});
+
+export const profitRateAscSortAtom = atom<TimeValue[]>((get) => {
+  const profitRate = get(profitRateAtom);
+
+  return [...profitRate].sort((a, b) => a.value - b.value);
 });

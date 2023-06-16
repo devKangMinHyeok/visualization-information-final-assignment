@@ -9,7 +9,7 @@ function RadarChartContainer() {
   const hoverTime = useAtomValue(hoverTimeAtom);
 
   return (
-    <div className="flex-2 h-3/5 flex flex-col justify-center items-center shadow-lg bg-white">
+    <div className="flex-auto flex flex-col justify-center items-center shadow-lg bg-white">
       {stockData && stockData[hoverTime] && (
         <RadarChart data={stockData[hoverTime]} />
       )}

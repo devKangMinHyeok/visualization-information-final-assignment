@@ -3,6 +3,7 @@
 import DataTable from "@/layouts/DataTableContainer";
 import DateSliderContainer from "@/layouts/DateSliderContainer";
 import LineChartContainer from "@/layouts/LineChartContainer";
+import ProfitRankChartContainer from "@/layouts/ProfitRankChartContainer";
 import RadarChartContainer from "@/layouts/RadarChartContainer";
 
 export default function Home() {
@@ -14,7 +15,10 @@ export default function Home() {
             <LineChartContainer />
             <DateSliderContainer />
           </div>
-          <RadarChartContainer />
+          <div className="flex-2 flex flex-col gap-5">
+            <RadarChartContainer />
+            <ProfitRankChartContainer />
+          </div>
         </div>
         <DataTable />
       </div>

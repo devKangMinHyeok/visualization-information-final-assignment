@@ -10,6 +10,9 @@ function RadarChartContainer() {
 
   return (
     <div className="flex-auto flex flex-col justify-center items-center shadow-lg bg-white">
+      <div className="w-full">
+        <h3 className="text-lg font-bold mx-5 my-5">OHLC</h3>
+      </div>
       {stockData && stockData[hoverTime] && (
         <RadarChart data={stockData[hoverTime]} />
       )}

@@ -1,6 +1,7 @@
 import { atom } from "jotai";
 import { Stock, TimeValue } from "stock-data";
 import { dateRangeAtom } from "./interactionDataAtom";
+import { calculateStockProfitRate } from "@/util/calculateStockProfitRate";
 
 export const stockDataAtom = atom<Stock[]>([]);
 
@@ -8,8 +9,7 @@ export const filteredStockDataAtom = atom((get) => {
   const stockData = get(stockDataAtom);
   const dateRange = get(dateRangeAtom);
   const { start, end } = dateRange;
-  console.log("stockData", stockData);
-  console.log("dateRange", dateRange);
+
   return stockData.filter(
     (data) => new Date(data.date) >= start && new Date(data.date) <= end
   );
@@ -49,33 +49,26 @@ export const transformedStockDataAtom = atom<TimeValue[]>((get) => {
 
 export const profitRateAtom = atom<TimeValue[]>((get) => {
   const stocks = get(filteredStockDataAtom);
-
-  return stocks
-    .map((stock, idx) => {
-      if (idx === 0) {
-        return null;
-      }
-
-      const prevClose = stocks[idx - 1].close;
-      const currClose = stock.close;
-      const profitRate = (currClose - prevClose) / prevClose;
-
-      return {
-        time: stock.date,
-        value: profitRate,
-      };
-    })
+  const profitRate = stocks
+    .map(calculateStockProfitRate)
     .filter(Boolean) as TimeValue[];
+  return profitRate;
 });
 
 export const profitRateDesSortAtom = atom<TimeValue[]>((get) => {
-  const profitRate = get(profitRateAtom);
+  const stocks = get(filteredStockDataAtom);
+  const profitRate = stocks
+    .map(calculateStockProfitRate)
+    .filter(Boolean) as TimeValue[];
 
   return [...profitRate].sort((a, b) => b.value - a.value);
 });
 
 export const profitRateAscSortAtom = atom<TimeValue[]>((get) => {
-  const profitRate = get(profitRateAtom);
+  const stocks = get(filteredStockDataAtom);
+  const profitRate = stocks
+    .map(calculateStockProfitRate)
+    .filter(Boolean) as TimeValue[];
 
   return [...profitRate].sort((a, b) => a.value - b.value);
 });
